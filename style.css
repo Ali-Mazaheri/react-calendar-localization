@@ -1,0 +1,84 @@
+* {
+  box-sizing: border-box;
+}
+
+.header{
+  height: 20px;
+}
+
+.header .headerCell,
+.weekLabel{
+  border:none !important;
+  text-align: center;
+}
+.weekLabel{
+  height:70px;
+  max-width: 24px !important;
+  width: 24px !important;
+  writing-mode:vertical-lr;
+  font-size: 13px;
+  padding: 4px;
+}
+
+.flexRow{
+  display: flex;
+}
+  .flexRow > *{
+    flex: 1;
+  }
+
+.headerCell,
+.dayCell{
+flex-basis:70px;
+flex-grow: 0;
+flex-shrink: 0;
+border:1px solid #cccccc;
+font-size: 13px;
+}
+
+.navBar{
+  font-size: 15px;
+  margin-left: 35px; 
+}
+
+.navBar > *{
+  text-decoration: none;
+  flex-basis:100px;
+  flex-grow: 1;
+  flex-shrink: 0;
+  max-width: 200px;
+}
+.navBar .selectedLink{
+  color:green;
+}
+
+
+.dayCell.past{
+ background-color: #dddddd;
+}
+.dayCell.current{
+  background-color: whitesmoke;
+}
+.dayCell.future{
+  background-color: #ffffff;
+}
+
+.calendarNav{
+  display: table;
+  width: 260px;
+  margin: 5px 0 0 20px;
+}
+.calendarNav .prev,
+.calendarNav .prev,
+.calendarNav .next,
+.calendarNav .next,
+.calendarNav .title{
+  text-decoration: none;
+  display: table-cell;
+  text-align: center;
+  width: 15px;
+  font-size: 30px;
+}
+.calendarNav .title{
+  font-size: 18px;
+}

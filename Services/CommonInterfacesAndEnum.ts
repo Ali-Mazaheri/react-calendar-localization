@@ -12,29 +12,3 @@ export const enum DayOfWeek {
 
 
 // intefaces ========================================================
-
-export interface ICellData {
-    date: Date;
-}
-
-export interface IConfigurations {
-    dbVersion: string;
-    startTime: number;
-    endTime: number;
-    //minutes
-    durationInMinute: number;
-    repeatEveryMinute: number;
-    culture: string;
-    startOfWeek: DayOfWeek;
-}
-
-export interface IDayCellData {
-    startTime: Date;
-    endTime: Date;
-    isNotAvailable: boolean;
-    comment: string;
-}
-
-export interface IDayCellStore {
-    [dayIndex: number]: IDayCellData[];
-}

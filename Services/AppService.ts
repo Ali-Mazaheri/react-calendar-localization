@@ -1,66 +1,72 @@
 import { } from "./Utils"
 import { IDayCellStore, IDayCellData, IConfigurations } from "./CommonInterfacesAndEnum";
 
+interface IStoreMonthModel {
+  [day: string]: string[]
+}
 
+interface IStoreModel {
+  [month: string]: IStoreMonthModel
+}
 
 export class AppService {
 
-  public startDayOfWeek = 0;
-
+  public static startDayOfWeek = 0;
+  public static dbVersion = '1.0.0';
   //----------------------------
-  private store: IDayCellStore = {};
 
   constructor() {
-    // if (!window.localStorage.getItem("dataVersion") || window.localStorage.getItem("dataVersion") != this.configuration.dbVersion) {
-    //   window.localStorage.clear();
-    //   window.localStorage.setItem("dataVersion", this.configuration.dbVersion);
-    // }
+    if (!window.localStorage.getItem("dataVersion") || window.localStorage.getItem("dataVersion") != AppService.dbVersion) {
+      window.localStorage.clear();
+      window.localStorage.setItem("dataVersion", AppService.dbVersion);
+    }
   }
 
-  saveData(date: Date, availability: IDayCellData[]): void {
-    window.localStorage.setItem(date.setHours(0, 0, 0, 0).toString(), JSON.stringify(availability));
-  }
+  public saveData(date: Date, data: string[]): void {
+    debugger;
+    let year = date.getFullYear().toString();
+    let month = date.getMonth().toString();
+    let day = date.getDay().toString();
 
-  getDayData(date: Date): IDayCellData[] {
-    var store = window.localStorage;
-    var dayIndex: string = date.setHours(0, 0, 0, 0).toString();
-    var dayOfWeek = date.getDay();
-    var rawData = store.getItem(dayIndex);
-    var res: IDayCellData[] = [];
-    if (!rawData) {
-      res = [];
-      // var startHour = this.configuration.startTime * 60;
-      // var entHour = this.configuration.endTime * 60;
-      // var timeStep = this.configuration.repeatEveryMinute;
-      // var duration = this.configuration.durationInMinute;
-      // for (let i = startHour; i <= entHour; i = i + timeStep) {
-      //   var DCD: IDayCellData = {
-      //     startTime: new Date(date.setHours(0, i, 0, 0)),
-      //     endTime: new Date(date.setHours(0, i + duration, 0, 0)),
-      //     isNotAvailable: false,
-      //     comment: ""
-      //   };
-      //   res.push(DCD);
-      // }
+    var storage = window.localStorage;
 
-      store.setItem(dayIndex.toString(), JSON.stringify(res));
-      return res;
+    if (!this.getYearData(year)) {
+      let d: IStoreModel = { [month]: { day: [] } };
+      storage.setItem(year, JSON.stringify(d));
     }
 
-    res = JSON.parse(rawData, (key, value) => {
-      if (typeof (value) == "string") {
-        // if (this.isoDateReg.test(value)) {
-        //   return new Date(value);
-        // } else if (this.msAjaxReg.test(value)) {
-        //   var b = this.msAjaxReg.exec(value)[1].split(/[-+,.]/);
-        //   return new Date(b[0] ? +b[0] : 0 - +b[1]);
-        // }
-        return value;
-      }
-      return value;
-    });
+    let yearStore: IStoreModel = this.getYearData(year);
 
-    return res;
+    let monthCollection = yearStore[month];
+    if (!monthCollection) {
+      yearStore[month] = { [day]: [] };
+    }
+
+    yearStore[month][day] = data;
+
+    window.localStorage.setItem(year, JSON.stringify(yearStore));
   }
 
+  public getYearData(year: string): IStoreModel {
+    var storage = window.localStorage;
+    return JSON.parse(storage.getItem(year) || null);
+  }
+
+  public getDayData(date: Date): string[] {
+    var storage = window.localStorage;
+    let year = date.getFullYear().toString();
+    let month = date.getMonth().toString();
+    let day = date.getDay().toString();
+
+    let yearData: IStoreModel = this.getYearData(year);
+
+    if (yearData) {
+      if (year[month]) {
+        if (yearData[month][day] instanceof Array) {
+          return yearData[month][day];
+        }
+      }
+    }
+    return null;
+  }
 }

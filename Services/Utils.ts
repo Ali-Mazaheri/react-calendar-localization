@@ -9,7 +9,7 @@ export function getCulture() {
   return culture;
 }
 
-export type timeUnit = 'y' | 'm' | 'd' | 'h' | 's' | 'ms';
+export type timeUnit = 'y' | 'm' | 'd' | 'h' | 's' | 'ms' | 'min';
 
 export const daysNameFull = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -44,7 +44,7 @@ export function addjustDate(baseDate: Date, value: number, unit: timeUnit): Date
     case 'h':
       date.setHours(date.getHours() + value);
       break;
-    case 'm':
+    case 'min':
       date.setMinutes(date.getMinutes() + value);
       break;
     case 's':

@@ -1,8 +1,8 @@
 export class TranslationService {
-  private static dictunary: { [culture: string]: { [key: string]: string } } = 
-  {"fa-IR":{"Month":'ماه', "Week":'هفته', "Day":'روز'}};
+  private static dictunary: { [culture: string]: { [key: string]: string } } =
+    { "fa-IR": { "Month": 'ماه', "Week": 'هفته', "Day": 'روز' } };
 
-  public static getLocalizedString(culture: string='en', key: string): string {
+  public static getLocalizedString(culture: string = 'en', key: string): string {
     if (culture.indexOf('en') > -1) {
       return key;
     }
@@ -38,6 +38,12 @@ export class TranslationService {
         break;
       case "weekDay":
         res = value.toLocaleDateString(culture, { weekday: "long" });
+        break;
+      case "time":
+        res = value.toLocaleDateString(culture, { hour: "2-digit", minute: "2-digit" });
+        break;
+        case "hour":
+        res = value.toLocaleDateString(culture, { hour: "2-digit" });
         break;
       case "timeHint":
         if (!value2) {

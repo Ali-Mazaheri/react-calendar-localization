@@ -21,12 +21,13 @@ export class Day extends Component<any, any> {
       <div className="day">
         <span>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{localizeDateTime('date', date)}
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span onClick={() => {
           this.appServ.saveData(date, this.state.data);
           alert('Saved');
-        }}>&#x1F4BE;</span>
+        }}>Save</span>
         {new Array(this.count).fill(1).map((a, i) => {
           let time = localizeDateTime("time", addjustDate(date, 480 + 60 * i, 'min'))
             .substr(12, 500);

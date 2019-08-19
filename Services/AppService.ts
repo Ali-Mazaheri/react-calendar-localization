@@ -23,7 +23,6 @@ export class AppService {
   }
 
   public saveData(date: Date, data: string[]): void {
-    debugger;
     let year = date.getFullYear().toString();
     let month = date.getMonth().toString();
     let day = date.getDay().toString();
@@ -31,7 +30,7 @@ export class AppService {
     var storage = window.localStorage;
 
     if (!this.getYearData(year)) {
-      let d: IStoreModel = { [month]: { day: [] } };
+      let d: IStoreModel = { [month]: { day: null } };
       storage.setItem(year, JSON.stringify(d));
     }
 
@@ -61,7 +60,7 @@ export class AppService {
     let yearData: IStoreModel = this.getYearData(year);
 
     if (yearData) {
-      if (year[month]) {
+      if (yearData[month]) {
         if (yearData[month][day] instanceof Array) {
           return yearData[month][day];
         }

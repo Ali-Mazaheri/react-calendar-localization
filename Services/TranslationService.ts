@@ -40,9 +40,12 @@ export class TranslationService {
         res = value.toLocaleDateString(culture, { weekday: "long" });
         break;
       case "time":
-        res = value.toLocaleDateString(culture, { hour: "2-digit", minute: "2-digit" });
+        res = value.toLocaleDateString(culture, { hour: "2-digit", minute: "2-digit" }).substr(12, 50);
         break;
-        case "hour":
+      case "time24":
+        res = value.toLocaleDateString(culture, {hour12: false, hour: "2-digit", minute: "2-digit" }).substr(12, 5);
+        break;
+      case "hour":
         res = value.toLocaleDateString(culture, { hour: "2-digit" });
         break;
       case "timeHint":

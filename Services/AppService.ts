@@ -1,8 +1,15 @@
 import { } from "./Utils"
-import { IDayCellStore, IDayCellData, IConfigurations } from "./CommonInterfacesAndEnum";
+
+
+export interface IStoreDayModel {
+  id: number,
+  start: Date,
+  end: Date,
+  content: string
+}
 
 interface IStoreMonthModel {
-  [day: string]: string[]
+  [day: string]: IStoreDayModel[]
 }
 
 interface IStoreModel {
@@ -22,7 +29,7 @@ export class AppService {
     }
   }
 
-  public saveData(date: Date, data: string[]): void {
+  public saveData(date: Date, data: IStoreDayModel[]): void {
     let year = date.getFullYear().toString();
     let month = date.getMonth().toString();
     let day = date.getDate().toString();
@@ -51,7 +58,7 @@ export class AppService {
     return JSON.parse(storage.getItem(year) || null);
   }
 
-  public getDayData(date: Date): string[] {
+  public getDayData(date: Date): IStoreDayModel[] {
     var storage = window.localStorage;
     let year = date.getFullYear().toString();
     let month = date.getMonth().toString();

@@ -82,3 +82,27 @@ font-size: 13px;
 .calendarNav .title{
   font-size: 18px;
 }
+
+/* ------------------------- */
+.dayBackground{
+  border: solid 1px;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  height: 50vh;
+  overflow-y: scroll;
+}
+.dayBackground .dayPattern{
+  position: absolute;
+  width: 100%;
+  border:dashed 1px #eee;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+}
+.dayBackground .dayPattern.halfHour{
+  border:dashed 1px #ddd;
+}
+.dayBackground .dayPattern.hour{
+  border:dashed 1px #ccc;
+}

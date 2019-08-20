@@ -17,6 +17,9 @@ export class TranslationService {
   public static getLocalizedDate(culture: string, format: string, value: Date, value2?: Date): string {
     var res = "";
     switch (format) {
+      case "local":
+        res = value.toLocaleString(culture);
+        break;
       case "day":
         res = value.toLocaleDateString(culture, { day: "numeric" })
         break;

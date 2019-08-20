@@ -91,6 +91,7 @@ font-size: 13px;
   margin: 0;
   height: 50vh;
   overflow-y: scroll;
+  cursor: pointer;
 }
 .dayBackground .dayPattern{
   position: absolute;
@@ -105,4 +106,14 @@ font-size: 13px;
 }
 .dayBackground .dayPattern.hour{
   border:dashed 1px #ccc;
+}
+
+
+/* ----------- */
+.timeSlot{
+  user-select: none;
+  position:absolute;
+  width: 100%;
+  opacity: 0.5;
+  border-radius: 2px;
 }
